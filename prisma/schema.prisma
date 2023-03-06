@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  name String  @unique
+  type1 String
+  type2 String
+  Total Int
+	HP Int
+	Attack Int
+	Defense Int
+	SpAtk Int
+	SpDef Int
+	Speed Int
+	Generation Int
+}
