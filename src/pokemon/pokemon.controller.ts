@@ -39,7 +39,7 @@ export class PokemonController {
   }
 
   @Get()
-  findAll(@Query() query: GetAllPokemonsDto): Promise<Pokemon[]> {
+  findAll(@Query() query: GetAllPokemonsDto): Promise<{total: number, pokemons:Pokemon[]}> {
     return this.pokemonService.findAll(query);
   }
 
