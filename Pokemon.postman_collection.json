@@ -84,7 +84,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Toto\",\n    \"type1\": \"Fire\",\n    \"type2\": \"Hair\",\n    \"Total\": 100,\n    \"HP\": 100,\n    \"Attack\": 100,\n    \"Defense\": 100,\n    \"SpAtk\": 100,\n    \"SpDef\": 100,\n    \"Speed\": 100,\n    \"Generation\": 100\n}",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"Toto\",\n    \"type1\": \"Fire\",\n    \"type2\": \"Hair\",\n    \"Total\": 100,\n    \"HP\": 10,\n    \"Attack\": 43,\n    \"Defense\": 88,\n    \"SpAtk\": 22,\n    \"SpDef\": 45,\n    \"Speed\": 1020,\n    \"Generation\": 12\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -2,7 +2,7 @@
     <p align="center">
 
 ## Description
-Small API Restful application exposing CRUD operations for Pokemons management.
+Small API Restful application exposing CRUD operations for Pokemons management. It uses [NestJS](https://docs.nestjs.com/) with [Prisma](https://www.prisma.io/) as ORM. The db used is sqlite to allow fast local setup.
 
 ### Features
 - CRUD Operations such as Create, Delete one, Get one, Update one, Get all. (full documentaion [above](### Rest api documentation))
@@ -16,6 +16,7 @@ Multiple ways to discover the API:
 - When this appication is launched, it exposes a swagger UI at /api
 
 ## Installation
+Node is a prerequesite to install the project locally.
 
 ```bash
 $ yarn install
@@ -47,3 +48,7 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Improvements
+Here some of the things that are missing on this project
+- The database is an sqlite db which doesnt allow data persistency between deployments (online db), a postgresdb or other databases can easily be added using prisma
+- There is no repository layers, the service layer has some prisma references. Ideally the prisma references would be encapsulated within a repository layer. So the service has no reference to the db technology
