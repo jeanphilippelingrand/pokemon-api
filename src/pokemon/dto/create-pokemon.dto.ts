@@ -25,40 +25,40 @@ export class CreatePokemonDto {
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  Total: number;
+  total: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  HP: number;
+  hp: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  Attack: number;
+  attack: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  Defense: number;
+  defense: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  SpAtk: number;
+  spAtk: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  SpDef: number;
+  spDef: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  Speed: number;
+  speed: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  Generation: number;
+  generation: number;
 }

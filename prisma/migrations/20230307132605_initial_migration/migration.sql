@@ -5,14 +5,14 @@ CREATE TABLE "Pokemon" (
     "id" INTEGER NOT NULL,
     "type1" TEXT NOT NULL,
     "type2" TEXT NOT NULL,
-    "Total" INTEGER NOT NULL,
-    "HP" INTEGER NOT NULL,
-    "Attack" INTEGER NOT NULL,
-    "Defense" INTEGER NOT NULL,
-    "SpAtk" INTEGER NOT NULL,
-    "SpDef" INTEGER NOT NULL,
-    "Speed" INTEGER NOT NULL,
-    "Generation" INTEGER NOT NULL
+    "total" INTEGER NOT NULL,
+    "hp" INTEGER NOT NULL,
+    "attack" INTEGER NOT NULL,
+    "defense" INTEGER NOT NULL,
+    "spAtk" INTEGER NOT NULL,
+    "spDef" INTEGER NOT NULL,
+    "speed" INTEGER NOT NULL,
+    "generation" INTEGER NOT NULL
 );
 
 -- CreateIndex

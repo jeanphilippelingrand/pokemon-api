@@ -16,12 +16,12 @@ model Pokemon {
   id Int
   type1 String
   type2 String
-  Total Int
-	HP Int
-	Attack Int
-	Defense Int
-	SpAtk Int
-	SpDef Int
-	Speed Int
-	Generation Int
+  total Int
+	hp Int
+	attack Int
+	defense Int
+	spAtk Int
+	spDef Int
+	speed Int
+	generation Int
 }

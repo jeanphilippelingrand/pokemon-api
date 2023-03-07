@@ -72,7 +72,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"name\": \"Toto\",\n    \"type1\": \"Fire\",\n    \"type2\": \"Hair\",\n    \"Total\": 100,\n    \"HP\": 10,\n    \"Attack\": 43,\n    \"Defense\": 88,\n    \"SpAtk\": 22,\n    \"SpDef\": 45,\n    \"Speed\": 1020,\n    \"Generation\": 12\n}",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"Toto\",\n    \"type1\": \"Fire\",\n    \"type2\": \"Hair\",\n    \"total\": 100,\n    \"hp\": 10,\n    \"attack\": 43,\n    \"defense\": 88,\n    \"spAtk\": 22,\n    \"spDef\": 45,\n    \"speed\": 1020,\n    \"generation\": 12\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,7 +98,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Generation\": 100\n}",
+					"raw": "{\n    \"generation\": 100\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -173,7 +173,7 @@
 		},
 		{
 			"key": "Server base url",
-			"value": "localhost:3000"
+			"value": "https://pokemon-api-production-4588.up.railway.app"
 		}
 	]
 }
