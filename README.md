@@ -37,6 +37,8 @@ NestJS boilerplate offers the proposed structure, grouping controllers, services
 Inline `//TODO` have been written within the code. Here some other improvements:
 - There is no repository layers, the service layer has some prisma references. Ideally the prisma references would be encapsulated within a repository layer. So the service has no reference to the db technology. Also, there is no proper application model definition, prisma types are used along the application.
 - The application could be dockerized to be portable to any deployment platform.
+- There is no propper logging and monitoring in place. Datadog could be used as logs management but also as APM.
+- There is no load test done, the performance of the API could be assessed using those.
 
 ## Installation
 - Node is a prerequesite to install the project locally.
