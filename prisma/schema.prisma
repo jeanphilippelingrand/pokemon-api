@@ -12,6 +12,8 @@ datasource db {
 
 model Pokemon {
   name String  @unique
+  uuid Int @id @default(autoincrement())
+  id Int
   type1 String
   type2 String
   Total Int

@@ -1,77 +1,41 @@
-import { Injectable, OnApplicationBootstrap, OnModuleInit } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Pokemon, Prisma } from '@prisma/client';
+import { Pokemon, Prisma} from '@prisma/client';
 import { PokemonAlreadyExistsError } from './errors/PokemonAlreadyExists.error';
 import { PokemonDoesntExistError } from './errors/PokemonDoesntExist.error';
-import { parse } from 'csv'
-import { createReadStream } from 'fs';
+import { RepositoryError } from './errors/Repository.error';
 
 @Injectable()
-export class PokemonService implements OnApplicationBootstrap {
+export class PokemonService {
 
   constructor(private prismaService: PrismaService) {}
 
-  async onApplicationBootstrap() {
-    const count = await this.prismaService.pokemon.count();
-    if (count > 0) {
-      return
-    }
-    const rawPokemons: {
-      [key:string]: string
-    }[] = []
-    await new Promise<void>((resolve, reject) => {
-      try {
-        createReadStream('./pokemons.csv')
-        .pipe(parse({ columns: true}))
-        .on('data', (row => {
-          rawPokemons.push(row)
-        }))
-        .on('end', () => {
-          resolve()
-        })
-      } catch(e){
-        reject(e)
+  async create(createInput: Prisma.PokemonCreateInput): Promise<Pokemon> {
+    try {
+      return await this.prismaService.pokemon.create({ data: createInput });
+    } catch(e) {
+      if(e.code === PrismaService.UNIQUE_CONTRAINT_ERROR_CODE) {
+        throw new PokemonAlreadyExistsError();
       }
-    })
-    const transactions = rawPokemons.map(row => {
-      return this.prismaService.pokemon.create({
-       data: {
-        name: row['Name'],
-        type1: row['Type 1'],
-        type2: row['Type 2'],
-        Total: +row['Total'],
-        HP: +row['HP'],
-        Attack: +row['Attack'],
-        Defense: +row['Defense'],
-        Speed: +row['Speed'],
-        SpAtk: +row['Sp. Atk'],
-        SpDef: +row['Sp. Def'],
-        Generation: +row['Generation']
-       } 
-      })
-    });
-    this.prismaService.$transaction(transactions)
-  }
-
-  async create(createInput: Prisma.PokemonCreateInput) {
-    const count = await this.prismaService.pokemon.count({
-      where: { name: createInput.name },
-    });
-    if (count > 0) {
-      throw new PokemonAlreadyExistsError();
+      throw new RepositoryError(e)
     }
-    return this.prismaService.pokemon.create({ data: createInput });
   }
 
   async findAll(query: Prisma.PokemonFindManyArgs) {
     const take = query.take || 10;
     const skip = query.skip || 0;
-    const total = await this.prismaService.pokemon.count()
-    const pokemons = await this.prismaService.pokemon.findMany({
-      skip,
-      take,
-    });
-    return {total, pokemons}
+    // Calling twice the db for one API call is not ideal
+    // Using transactions could allow to group those two operations together
+    try {
+      const total = await this.prismaService.pokemon.count()
+      const pokemons = await this.prismaService.pokemon.findMany({
+        skip,
+        take,
+      });
+      return {total, pokemons}
+    } catch(e) {
+      throw new RepositoryError(e)
+    }
   }
 
   async findOne(where: Prisma.PokemonWhereUniqueInput): Promise<Pokemon> {
@@ -87,30 +51,28 @@ export class PokemonService implements OnApplicationBootstrap {
     updateInput: Prisma.PokemonUpdateInput,
   ) {
     try {
-      const updatedPokemon = await this.prismaService.pokemon.update({
+      return await this.prismaService.pokemon.update({
         where,
         data: updateInput,
       });
-      return updatedPokemon
     } catch (e) {
-      if (e.code === 'P2025') {
+      if (e.code === PrismaService.ENTITY_NOT_FOUND_ERROR_CODE) {
         throw new PokemonDoesntExistError()
       } 
-      throw e
+      throw new RepositoryError(e)
     }
   }
 
   async deleteOne(where: Prisma.PokemonWhereUniqueInput) {
     try {
-      const deletedPokemon = await this.prismaService.pokemon.delete({
+      return await this.prismaService.pokemon.delete({
         where,
       });
-      return deletedPokemon
     } catch(e) {
-      if (e.code === 'P2025') {
+      if (e.code === PrismaService.ENTITY_NOT_FOUND_ERROR_CODE) {
         throw new PokemonDoesntExistError()
       } 
-      throw e
+      throw new RepositoryError(e)
     }
   }
 }

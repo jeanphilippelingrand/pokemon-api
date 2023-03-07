@@ -18,16 +18,18 @@ import { Pokemon } from '@prisma/client';
 import { PokemonAlreadyExistsError } from './errors/PokemonAlreadyExists.error';
 import { GetAllPokemonsDto } from './dto/get-all-pokemons.dto';
 import { PokemonDoesntExistError } from './errors/PokemonDoesntExist.error';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
+// Controller class handled application errors and transform them to REST API Errors (Using native NestJs errors)
 @Controller('pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
   @Post()
+  @ApiTags('Create one pokemon')
   async create(@Body() createPokemonDto: CreatePokemonDto) {
     try {
-      const result = await this.pokemonService.create(createPokemonDto);
-      return result;
+      return await this.pokemonService.create(createPokemonDto);
     } catch (error) {
       if (error instanceof PokemonAlreadyExistsError) {
         throw new ConflictException(
@@ -39,15 +41,16 @@ export class PokemonController {
   }
 
   @Get()
+  @ApiTags('Get all pokemons')
   findAll(@Query() query: GetAllPokemonsDto): Promise<{total: number, pokemons:Pokemon[]}> {
     return this.pokemonService.findAll(query);
   }
 
   @Get(':name')
+  @ApiTags('Get one pokemon')
   async findOne(@Param('name') name: string): Promise<Pokemon> {
     try {
-      const result = await this.pokemonService.findOne({ name });
-      return result;
+      return await this.pokemonService.findOne({ name });
     } catch (error) {
       if (error instanceof PokemonDoesntExistError) {
         throw new NotFoundException(
@@ -59,16 +62,16 @@ export class PokemonController {
   }
 
   @Patch(':name')
+  @ApiTags('Update one pokemon')
   async update(
     @Param('name') name: string,
     @Body() updatePokemonDto: UpdatePokemonDto,
   ): Promise<Pokemon> {
     try {
-      const result = await this.pokemonService.updateOne(
+      return await this.pokemonService.updateOne(
         { name },
         updatePokemonDto,
       );
-      return result;
     } catch (error) {
       if (error instanceof PokemonDoesntExistError) {
         throw new NotAcceptableException(
@@ -79,11 +82,12 @@ export class PokemonController {
     }
   }
 
+  
   @Delete(':name')
+  @ApiTags('Remove one pokemmon')
   async remove(@Param('name') name: string): Promise<Pokemon> {
     try {
-      const result = await this.pokemonService.deleteOne({ name });
-      return result;
+      return await this.pokemonService.deleteOne({ name });
     } catch (error) {
       if (error instanceof PokemonDoesntExistError) {
         throw new NotFoundException(
