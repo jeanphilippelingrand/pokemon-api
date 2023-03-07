@@ -26,6 +26,8 @@ $ yarn install
 
 ```bash
 # development
+# To setup the db
+$ npx prisma migrate dev
 $ yarn run start
 
 # watch mode

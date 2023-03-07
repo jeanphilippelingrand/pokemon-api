@@ -35,4 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # Data
-prisma/dev.db
+/prisma/dev.db
