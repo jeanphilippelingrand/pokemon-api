@@ -52,5 +52,6 @@ $ yarn run test:cov
 
 ## Improvements
 Here some of the things that are missing on this project
-- The database is an sqlite db which doesnt allow data persistency between deployments (online db), a postgresdb or other databases can easily be added using prisma
-- There is no repository layers, the service layer has some prisma references. Ideally the prisma references would be encapsulated within a repository layer. So the service has no reference to the db technology
+- The database is an sqlite db which doesnt allow data persistency between deployments (online db), a postgresdb or other databases can easily be added using prisma.
+- There is no repository layers, the service layer has some prisma references. Ideally the prisma references would be encapsulated within a repository layer. So the service has no reference to the db technology. Also, there is no proper application model definition, prisma types are used along the application.
+- The application could be dockerized to be portable to any deployment platform.
