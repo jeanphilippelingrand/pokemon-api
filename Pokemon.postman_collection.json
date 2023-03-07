@@ -24,23 +24,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/pokemon?take=-1&skip=0",
+					"raw": "{{Server base url}}/pokemon",
 					"host": [
-						"localhost"
+						"{{Server base url}}"
 					],
-					"port": "3000",
 					"path": [
 						"pokemon"
-					],
-					"query": [
-						{
-							"key": "take",
-							"value": "-1"
-						},
-						{
-							"key": "skip",
-							"value": "0"
-						}
 					]
 				}
 			},
@@ -64,14 +53,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/pokemon/Toto",
+					"raw": "{{Server base url}}/pokemon/{{Pokemon name}}",
 					"host": [
-						"localhost"
+						"{{Server base url}}"
 					],
-					"port": "3000",
 					"path": [
 						"pokemon",
-						"Toto"
+						"{{Pokemon name}}"
 					]
 				}
 			},
@@ -92,11 +80,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/pokemon",
+					"raw": "{{Server base url}}/pokemon",
 					"host": [
-						"localhost"
+						"{{Server base url}}"
 					],
-					"port": "3000",
 					"path": [
 						"pokemon"
 					]
@@ -119,14 +106,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/pokemon/Toto",
+					"raw": "{{Server base url}}/pokemon/{{Pokemon name}}",
 					"host": [
-						"localhost"
+						"{{Server base url}}"
 					],
-					"port": "3000",
 					"path": [
 						"pokemon",
-						"Toto"
+						"{{Pokemon name}}"
 					]
 				}
 			},
@@ -147,18 +133,47 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/pokemon/Toto",
+					"raw": "{{Server base url}}/pokemon/{{Pokemon name}}",
 					"host": [
-						"localhost"
+						"{{Server base url}}"
 					],
-					"port": "3000",
 					"path": [
 						"pokemon",
-						"Toto"
+						"{{Pokemon name}}"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Pokemon name",
+			"value": "Toto"
+		},
+		{
+			"key": "Server base url",
+			"value": "localhost:3000"
 		}
 	]
 }
